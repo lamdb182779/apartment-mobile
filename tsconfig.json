@@ -1,10 +1,6 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-<<<<<<< HEAD
-    "strict": true
-  }
-=======
     "strict": true,
     "paths": {
       "@/*": [
@@ -18,5 +14,4 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
   ]
->>>>>>> e522fad (replace new version)
 }

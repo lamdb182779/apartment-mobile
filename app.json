@@ -4,33 +4,15 @@
     "slug": "apartment-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-<<<<<<< HEAD
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-=======
     "icon": "./assets/images/icon.png",
     "scheme": "apartmentmobile",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
->>>>>>> e522fad (replace new version)
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-<<<<<<< HEAD
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-=======
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
@@ -55,7 +37,6 @@
     ],
     "experiments": {
       "typedRoutes": true
->>>>>>> e522fad (replace new version)
     }
   }
 }

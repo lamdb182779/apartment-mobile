@@ -7,15 +7,10 @@ node_modules/
 .expo/
 dist/
 web-build/
-<<<<<<< HEAD
-
-# Native
-=======
 expo-env.d.ts
 
 # Native
 .kotlin/
->>>>>>> e522fad (replace new version)
 *.orig.*
 *.jks
 *.p8
@@ -40,8 +35,5 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
-<<<<<<< HEAD
-=======
 
 app-example
->>>>>>> e522fad (replace new version)

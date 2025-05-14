@@ -35,7 +35,7 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
     return (
         <Pressable
             onPress={onPress}
-            className={`p-3 rounded-md ${buttonStyles[type]} hover:bg-opacity-80 focus:outline-none ${className}`}
+            className={`p-3 rounded-md ${buttonStyles[type]} focus:outline-none ${className}`}
         >
             <Text className={`text-center ${textStyles[type]} text-lg`}>{title}</Text>
         </Pressable>

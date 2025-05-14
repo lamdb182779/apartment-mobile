@@ -1,41 +1,27 @@
+import { poster } from "@/service/fetch";
 import { useNavigation } from "@react-navigation/native";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
-import { CustomButton } from "../../components/ui/button";
-import { CustomSelect } from "../../components/ui/select";
-
-const roles = [
-    { value: "regent", id: "11", name: "Thành viên ban quản trị" },
-    { value: "director", id: "12", name: "Trưởng ban quản lý" },
-    { value: "receptionist", id: "21", name: "Lễ tân" },
-    { value: "technician", id: "23", name: "Kỹ thuật viên" },
-    { value: "accountant", id: "22", name: "Kế toán" },
-    { value: "owner", id: "31", name: "Chủ căn hộ" },
-    { value: "resident", id: "32", name: "Cư dân" },
-];
+import useSWRMutation from "swr/mutation";
+import { CustomButton } from "../../../components/ui/button";
+import { CustomSelect } from "../../../components/ui/select";
 
 export default function LoginScreen() {
+
+    const roles = [
+        { value: "owner", id: "31", name: "Chủ căn hộ" },
+        { value: "resident", id: "32", name: "Cư dân" },
+    ]
+
     const [role, setRole] = useState("owner");
-    const usernameRef = useRef("");
-    const passwordRef = useRef("");
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
     const navigation = useNavigation();
 
-    const handleLogin = async () => {
-        const username = usernameRef.current;
-        const password = passwordRef.current;
-        const roleId = roles.find((item) => item.value === role)?.id || "31";
-        // const user = await authenticate(username, password, roleId);
+    const { trigger, isMutating } = useSWRMutation("/auth/resetPw", poster)
 
-        // if (user?.error) {
-        //     if (user.error === "Tài khoản này chưa được xác thực!") {
-        //         // navigation.navigate("Verify", { id: username, roleId });
-        //     } else {
-        //         alert(user.error);
-        //     }
-        // } else {
-        //     alert("Đăng nhập thành công!");
-        //     // Chuyển trang khác
-        // }
+    const handleLogin = async () => {
+        const roleId = roles.find((item) => item.value === role)?.id || "31";
     };
 
     return (
@@ -45,7 +31,7 @@ export default function LoginScreen() {
             <CustomSelect
                 options={roles}
                 selected={role}
-                onSelect={(item) => setRole(item)}
+                onSelect={(item) => setRole(item.value)}
                 keyExtractor={(item) => item.id}
                 renderButton={(open, selected) => (
                     <Pressable
@@ -53,24 +39,22 @@ export default function LoginScreen() {
                         className="border p-4 rounded-md bg-white shadow-md"
                     >
                         <Text className="text-lg text-gray-700">
-                            {selected ? selected.name : "Chọn vai trò"}
+                            {selected ? roles.find((item) => item.value === selected)?.name : "Chọn vai trò"}
                         </Text>
                     </Pressable>
                 )}
             />
             <Text className="text-sm text-gray-600 mt-4">Tên đăng nhập</Text>
             <TextInput
-                style={{ borderWidth: 1, padding: 10, borderRadius: 8 }}
-                className="mt-2 w-full"
-                onChangeText={(text) => (usernameRef.current = text)}
+                className="mt-2 w-full border rounded p-3 bg-white"
+                onChangeText={(text) => setUsername(text)}
                 placeholder="Nhập tên đăng nhập"
             />
             <Text className="text-sm text-gray-600 mt-4">Mật khẩu</Text>
             <TextInput
-                style={{ borderWidth: 1, padding: 10, borderRadius: 8 }}
-                className="mt-2 w-full"
+                className="mt-2 w-full border rounded p-3 bg-white"
                 secureTextEntry
-                onChangeText={(text) => (passwordRef.current = text)}
+                onChangeText={(text) => setPassword(text)}
                 placeholder="Nhập mật khẩu"
             />
             <CustomButton

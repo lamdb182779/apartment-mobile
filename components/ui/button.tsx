@@ -1,12 +1,14 @@
 // /components/ui/CustomButton.tsx
-import React from "react";
+import React, { ReactNode } from "react";
 import { Pressable, Text } from "react-native";
 
 interface CustomButtonProps {
     onPress: () => void;
-    title: string;
+    children: ReactNode;
     type?: "primary" | "success" | "danger" | "warning" | "secondary" | "outline";
     className?: string;
+    disabled?: boolean
+    size?: "lg" | "sm"
 }
 
 const buttonStyles = {
@@ -28,16 +30,19 @@ const textStyles = {
 
 export const CustomButton: React.FC<CustomButtonProps> = ({
     onPress,
-    title,
+    children,
     type = "primary",
     className,
+    disabled = false,
+    size = "sm"
 }) => {
     return (
         <Pressable
+            disabled={disabled}
             onPress={onPress}
-            className={`p-3 rounded-md ${buttonStyles[type]} focus:outline-none ${className}`}
+            className={`${size === "sm" ? "py-2" : "py-3"} rounded-md ${buttonStyles[type]} focus:outline-none ${className}`}
         >
-            <Text className={`text-center ${textStyles[type]} text-lg`}>{title}</Text>
+            <Text className={`text-center ${textStyles[type]} ${size === "sm" ? "" : "text-lg"} font-semibold`}>{children}</Text>
         </Pressable>
     );
 };

@@ -1,3 +1,4 @@
+import { getAccessToken } from "@/auth";
 import axios from "axios";
 import { isArray } from "lodash";
 import { Toast } from 'toastify-react-native';
@@ -7,6 +8,19 @@ const SERVER_DOMAIN = process.env.EXPO_PUBLIC_SERVER_DOMAIN
 export const axiosInstance = axios.create({
     baseURL: SERVER_DOMAIN
 })
+
+axiosInstance.interceptors.request.use(
+    async (config) => {
+        const token = await getAccessToken();
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        } else {
+            delete config.headers.Authorization;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
 
 export const fetcher = (path: string) => axiosInstance.get(path, {
     withCredentials: true
@@ -79,6 +93,5 @@ export const posterNoHeader = async (path: string, { arg }: { arg: object }) => 
     .then(res => {
         return res.data
     }).catch(error => {
-        console.log(error)
         Toast.error(error?.response?.data?.message || "Thêm mới thất bại")
     })

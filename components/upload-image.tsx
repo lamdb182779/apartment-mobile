@@ -86,7 +86,7 @@ export default function ImageUpload({
     return (
         <Pressable className='relative' disabled={uploading} onPress={pickImage}>
             {uploading &&
-                <View className='absolute w-full h-full flex justify-center items-center'>
+                <View className='absolute w-full h-full flex justify-center items-center bg-black/50'>
                     <ActivityIndicator size="large" color="#facc15" />
                 </View>
             }

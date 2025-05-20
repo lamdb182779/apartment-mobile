@@ -1,7 +1,6 @@
 import useAuth from '@/hooks/use-auth';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs, useNavigation } from 'expo-router';
-import { Pressable, Text } from 'react-native';
 
 export default function TabLayout() {
     const navigation = useNavigation()
@@ -18,6 +17,18 @@ export default function TabLayout() {
             title: 'Đăng nhập',
             icon: 'key',
             show: !user
+        },
+        {
+            name: 'owner/apartments/index',
+            title: 'Căn hộ sở hữu',
+            icon: 'home',
+            show: false
+        },
+        {
+            name: 'customer/notifications/index',
+            title: 'Thông báo',
+            icon: 'bell',
+            show: !!user
         },
         {
             name: 'profile/index',
@@ -38,21 +49,14 @@ export default function TabLayout() {
                 backgroundColor: "#fefdf5"
             },
             tabBarHideOnKeyboard: true,
-            headerStyle: { backgroundColor: "#1e293b" },
+            headerStyle: {
+                backgroundColor: "#1e293b"
+            },
             headerTintColor: "#fff",
             headerTitleAlign: "center",
-            headerLeft: (navigation.canGoBack?.()) ?
-                () => (
-                    <Pressable
-                        onPress={() => navigation.goBack()}
-                        style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12 }}
-                    >
-                        <FontAwesome name="angle-left" size={24} color="#fff" />
-                        <Text style={{ color: '#fff', marginLeft: 6 }}>Quay lại</Text>
-                    </Pressable>
-                )
-                :
-                () => null,
+            headerTitleStyle: {
+                fontSize: 18
+            },
         }}
         >
             {screens.map(({ name, title, icon, show }) => (

@@ -13,6 +13,10 @@ export default function RootLayout() {
       name: "customer/notifications/[id]/index",
       headerTitle: "Chi tiết thông báo"
     },
+    {
+      name: "customer/bills/[id]/index",
+      headerTitle: "Chi tiết hóa đơn"
+    },
   ]
   return (
     <AuthProvider>

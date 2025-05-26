@@ -46,7 +46,9 @@
     "react-native-webview": "^13.13.5",
     "swr": "^2.3.3",
     "tailwindcss": "^3.4.17",
-    "toastify-react-native": "^7.2.0"
+    "toastify-react-native": "^7.2.0",
+    "@react-native-picker/picker": "2.11.0",
+    "@react-native-community/datetimepicker": "8.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

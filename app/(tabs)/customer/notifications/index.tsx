@@ -1,30 +1,10 @@
 import Notification from "@/components/page/customer/notifications/notification";
 import { fetcher, updater } from "@/services/fetch";
-import { useState } from "react";
+import { usePathname } from "expo-router";
+import { useEffect, useState } from "react";
 import { ActivityIndicator, Pressable, ScrollView, Text } from "react-native";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
-
-const notifications = [
-    {
-        title: "Thông báo cắt điện tháng 5",
-        date: "02/05/2025",
-    },
-    {
-        title: "Thông báo cắt điện tháng 5",
-        date: "02/05/2025",
-    },
-    {
-        title: "Thông báo cắt điện tháng 12",
-        date: "02/05/2025",
-    },
-    {
-        title: "Thông báo nghỉ lễ 30/4 - 1/5",
-        description:
-            "Ban quản lý chung cư xin trân trọng thông báo lịch nghỉ lễ 30/4 - 1/5 như dưới đây",
-        date: "02/05/2025",
-    },
-];
 
 export default function NotificationScreen() {
     const [page, setPage] = useState(1)
@@ -36,6 +16,10 @@ export default function NotificationScreen() {
             if (update) mutate()
         }
     }
+    const path = usePathname()
+    useEffect(() => {
+        mutate()
+    }, [path])
     return (
         <>
             {isLoading ?

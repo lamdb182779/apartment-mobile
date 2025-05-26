@@ -47,7 +47,7 @@ export default function LoginScreen() {
                 setPassword("")
                 setUsername("")
                 Toast.success("Đăng nhập thành công")
-                router.push("/profile")
+                router.push("/")
             } else Toast.error("Đăng nhập thất bại!")
         }
     };

@@ -2,7 +2,8 @@ import { CustomButton } from '@/components/ui/button';
 import useAuth from '@/hooks/use-auth';
 import { fetcher } from '@/services/fetch';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { useRouter } from 'expo-router';
+import { usePathname, useRouter } from 'expo-router';
+import { useEffect } from 'react';
 import { ActivityIndicator, Image, Pressable, ScrollView, Text, View } from 'react-native';
 import useSWR from 'swr';
 
@@ -10,14 +11,19 @@ export default function ProfileScreen() {
     const UNKNOWN_IMAGE = process.env.EXPO_PUBLIC_UNKNOWN_IMAGE
     const router = useRouter();
 
-    const { data, isLoading } = useSWR("/profile", fetcher)
+    const { data, isLoading, mutate } = useSWR("/profile", fetcher)
+    const path = usePathname()
+    useEffect(() => {
+        mutate()
+    }, [path])
+
 
     const menuItems = [
         { icon: '🏠', label: 'Căn hộ của tôi', path: '/apartment' },
-        { icon: '📝', label: 'Ý kiến đánh giá', path: '/feedback' },
-        { icon: '🧰', label: 'Dịch vụ', path: '/services' },
-        { icon: '💰', label: 'Hóa đơn', path: '/bills' },
-        { icon: '🔔', label: 'Thông báo', path: '/notifications' },
+        { icon: '📝', label: 'Ý kiến đánh giá', path: '/customer/comments' },
+        { icon: '🧰', label: 'Dịch vụ', path: '/customer/services' },
+        { icon: '💰', label: 'Hóa đơn', path: '/customer/bills' },
+        { icon: '🔔', label: 'Thông báo', path: '/customer/notifications' },
     ];
 
     const { logout } = useAuth()
@@ -54,7 +60,7 @@ export default function ProfileScreen() {
                     {menuItems.map((item, idx) => (
                         <Pressable
                             key={idx}
-                            // onPress={() => router.push(item.path as any)}
+                            onPress={() => router.push(item.path as any)}
                             className="flex-row items-center py-4 border-b border-gray-200"
                         >
                             <Text className="text-2xl mr-3">{item.icon}</Text>

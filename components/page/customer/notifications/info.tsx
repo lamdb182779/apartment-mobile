@@ -1,12 +1,12 @@
 import { fetcher } from '@/services/fetch';
 import React from 'react';
-import { ActivityIndicator, Dimensions, Text, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { WebView } from 'react-native-webview';
 import useSWR from 'swr';
 
 export default function Info({ id }: { id: string }) {
     const { data, isLoading } = useSWR(`/notifications/${id}`, fetcher)
-    const { height } = Dimensions.get('window')
+    const CLIENT_WEB_DOMAIN = process.env.EXPO_PUBLIC_CLIENT_WEB_DOMAIN
     return (
         <>
             {isLoading ?

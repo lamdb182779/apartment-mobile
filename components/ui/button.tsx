@@ -3,7 +3,7 @@ import React, { ReactNode } from "react";
 import { Pressable, Text } from "react-native";
 
 interface CustomButtonProps {
-    onPress: () => void;
+    onPress?: () => void;
     children: ReactNode;
     type?: "primary" | "success" | "danger" | "warning" | "secondary" | "outline";
     className?: string;

@@ -25,6 +25,24 @@ export default function TabLayout() {
             show: false
         },
         {
+            name: 'customer/bills/index',
+            title: 'Hóa đơn',
+            icon: 'money',
+            show: !!user
+        },
+        {
+            name: 'customer/services/index',
+            title: 'Dịch vụ',
+            icon: 'smile-o',
+            show: !!user
+        },
+        {
+            name: 'customer/comments/index',
+            title: 'Ý kiến',
+            icon: 'comment',
+            show: !!user
+        },
+        {
             name: 'customer/notifications/index',
             title: 'Thông báo',
             icon: 'bell',

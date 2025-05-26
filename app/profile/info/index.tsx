@@ -19,17 +19,19 @@ export default function ProfileInfoScreen() {
     }
     const { data, isLoading } = useSWR("/profile", fetcher)
     const { trigger } = useSWRMutation("/avatar", updater)
+    const handleUpload = async () => {
+        const update = await trigger({ image })
+
+    }
     const [image, setImage] = useState(UNKNOWN_IMAGE)
     const [first, setFirst] = useState(true)
     useEffect(() => {
         setImage(data?.image || UNKNOWN_IMAGE)
     }, [data])
-    const handleUpload = async () => {
-        const update = await trigger({ image })
-    }
 
     useEffect(() => {
         if (first) setFirst(false)
+
         else if (image && image !== data?.image && !isLoading) {
             handleUpload()
         }

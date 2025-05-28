@@ -5,8 +5,21 @@ export default function Info({ id }: { id: string }) {
     return (
         <>
             <WebView
-                source={{ uri: `http://192.168.1.4:3000/mobile/bills/${id}` }}
+                source={{ uri: `${CLIENT_WEB_DOMAIN}/mobile/bills/${id}` }}
                 scrollEnabled
+                onMessage={(event) => {
+                    console.log("Log từ WebView:", event.nativeEvent.data)
+                }}
+                injectedJavaScript={`
+    (function() {
+      const originalLog = console.log;
+      console.log = function(...args) {
+        window.ReactNativeWebView.postMessage(args.join(" "));
+        originalLog.apply(console, args);
+      };
+    })();
+    true;
+  `}
             />
         </>
     )

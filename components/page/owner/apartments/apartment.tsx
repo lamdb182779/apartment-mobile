@@ -1,9 +1,17 @@
 
-import { Image, Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { Image, Pressable, Text, View } from "react-native";
 export default function Apartment({ apt }: { apt: any }) {
     const UNKNOWN_APARTMENT = process.env.EXPO_PUBLIC_UNKNOWN_APARTMENT
+    const router = useRouter()
+    const handleInfo = () => {
+        router.push({
+            pathname: "/owner/apartments/[number]",
+            params: { number: apt.number }
+        })
+    }
     return (
-        <View className="bg-white rounded-2xl overflow-hidden shadow-md mb-4">
+        <Pressable onPress={() => handleInfo()} className="bg-white rounded-2xl overflow-hidden shadow-md mb-4">
             <Image
                 source={{ uri: apt.image || UNKNOWN_APARTMENT }}
                 className="w-full h-48 object-cover"
@@ -39,6 +47,6 @@ export default function Apartment({ apt }: { apt: any }) {
                     )}
                 </View>
             </View>
-        </View>
+        </Pressable>
     )
 }

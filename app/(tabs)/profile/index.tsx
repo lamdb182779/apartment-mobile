@@ -10,6 +10,7 @@ import useSWR from 'swr';
 export default function ProfileScreen() {
     const UNKNOWN_IMAGE = process.env.EXPO_PUBLIC_UNKNOWN_IMAGE
     const router = useRouter();
+    const { user } = useAuth()
 
     const { data, isLoading, mutate } = useSWR("/profile", fetcher)
     const path = usePathname()
@@ -19,7 +20,7 @@ export default function ProfileScreen() {
 
 
     const menuItems = [
-        { icon: '🏠', label: 'Căn hộ của tôi', path: '/apartment' },
+        { icon: '🏠', label: 'Căn hộ của tôi', path: user?.role === 31 ? '/owner/apartments' : '/resident/apartment' },
         { icon: '📝', label: 'Ý kiến đánh giá', path: '/customer/comments' },
         { icon: '🧰', label: 'Dịch vụ', path: '/customer/services' },
         { icon: '💰', label: 'Hóa đơn', path: '/customer/bills' },

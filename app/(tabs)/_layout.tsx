@@ -25,6 +25,12 @@ export default function TabLayout() {
             show: false
         },
         {
+            name: 'resident/apartment/index',
+            title: 'Thông tin căn hộ',
+            icon: 'home',
+            show: false
+        },
+        {
             name: 'customer/bills/index',
             title: 'Hóa đơn',
             icon: 'money',
@@ -33,14 +39,14 @@ export default function TabLayout() {
         {
             name: 'customer/services/index',
             title: 'Dịch vụ',
-            icon: 'smile-o',
+            icon: 'cart-plus',
             show: !!user
         },
         {
             name: 'customer/comments/index',
             title: 'Ý kiến',
             icon: 'comment',
-            show: !!user
+            show: false
         },
         {
             name: 'customer/notifications/index',
@@ -75,6 +81,7 @@ export default function TabLayout() {
             headerTitleStyle: {
                 fontSize: 18
             },
+            lazy: true,
         }}
         >
             {screens.map(({ name, title, icon, show }) => (
@@ -93,6 +100,7 @@ export default function TabLayout() {
                         key={name}
                         name={name}
                         options={{
+                            title,
                             href: null
                         }}
                     />

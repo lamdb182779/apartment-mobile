@@ -26,7 +26,7 @@ export default function Info({ id }: { id: string }) {
                             </View>
 
                             <WebView
-                                source={{ uri: `http://192.168.1.4:3000/mobile/noti/${id}` }}
+                                source={{ uri: `${CLIENT_WEB_DOMAIN}/mobile/noti/${id}` }}
                                 scrollEnabled
                             />
 

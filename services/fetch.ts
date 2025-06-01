@@ -22,9 +22,7 @@ axiosInstance.interceptors.request.use(
     (error) => Promise.reject(error)
 );
 
-export const fetcher = (path: string) => axiosInstance.get(path, {
-    withCredentials: true
-})
+export const fetcher = (path: string) => axiosInstance.get(path)
     .then(res => res.data)
     .catch(error => {
         if (error?.response?.data?.message) {
@@ -41,9 +39,7 @@ export const logout = async () => {
     else return false
 }
 
-export const updater = async (path: string, { arg }: { arg: object }) => axiosInstance.patch(path, arg, {
-    withCredentials: true
-})
+export const updater = async (path: string, { arg }: { arg: object }) => axiosInstance.patch(path, arg)
     .then(res => {
         Toast.success(res?.data?.message || "Cập nhật thành công!")
         return res.data
@@ -56,9 +52,7 @@ export const updater = async (path: string, { arg }: { arg: object }) => axiosIn
         } else Toast.error("Cập nhật thất bại!")
     })
 
-export const poster = async (path: string, { arg }: { arg: object }) => axiosInstance.post(path, arg, {
-    withCredentials: true
-})
+export const poster = async (path: string, { arg }: { arg: object }) => axiosInstance.post(path, arg)
     .then(res => {
         Toast.success(res?.data?.message || "Thêm mới thành công!")
         return res.data
@@ -73,7 +67,6 @@ export const poster = async (path: string, { arg }: { arg: object }) => axiosIns
 
 export const deleter = async (path: string, { arg }: { arg: object }) => axiosInstance.delete(path, {
     data: arg,
-    withCredentials: true
 })
     .then(res => {
         Toast.success(res?.data?.message || "Xóa thành công!")

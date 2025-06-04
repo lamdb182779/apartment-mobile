@@ -24,14 +24,6 @@ axiosInstance.interceptors.request.use(
 
 export const fetcher = (path: string) => axiosInstance.get(path)
     .then(res => res.data)
-    .catch(error => {
-        if (error?.response?.data?.message) {
-            const message = error.response.data.message
-            if (isArray(message)) {
-                message.map(item => Toast.error(item))
-            } else Toast.error(message)
-        }
-    })
 
 export const logout = async () => {
     const data = await fetcher("/logout")
